@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.json());
-
-// Создаем подключение к базе данных
 const db = new sqlite3.Database('./base/api01.db');
 
 // Получение всех записей
@@ -17,7 +15,7 @@ app.get('/employees', (req, res) => {
   });
 });
 
-// Получение одной записи по employee_id
+// Получение одной записи 
 app.get('/employees/:id', (req, res) => {
   const id = req.params.id;
   const sql = 'SELECT * FROM employees WHERE employee_id = ?';
@@ -50,7 +48,7 @@ app.post('/employees', (req, res) => {
   });
 });
 
-// Обновление записи по employee_id
+// Обновление записи 
 app.put('/employees/:id', (req, res) => {
   const id = req.params.id;
   const updatedEmployee = req.body;
@@ -74,7 +72,7 @@ app.put('/employees/:id', (req, res) => {
   });
 });
 
-// Удаление записи по employee_id
+// Удаление записи 
 app.delete('/employees/:id', (req, res) => {
   const id = req.params.id;
   const sql = 'DELETE FROM employees WHERE employee_id = ?';
@@ -84,7 +82,6 @@ app.delete('/employees/:id', (req, res) => {
   });
 });
 
-// Запускаем сервер
 app.listen(3000, () => {
   console.log('Сервер запущен на порту 3000');
 });
